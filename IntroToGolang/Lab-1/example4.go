@@ -12,3 +12,5 @@ func main() {
 	}
 	fmt.Println("....DONE!")
 }
+
+// Example 4 Done. Allah Hafiz
