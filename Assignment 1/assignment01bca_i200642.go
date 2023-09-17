@@ -6,10 +6,12 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	assignmentpackage "github.com/naufilmoten/Blockchain/Assignment1"
 )
 
 func main() {
-	bc := &Blockchain{}
+	bc := &assignmentpackage.Blockchain{}
 	scanner := bufio.NewScanner(os.Stdin)
 
 	fmt.Println("\n\n1. Add a new block")
@@ -40,7 +42,7 @@ func main() {
 			if len(bc.Blocks) > 0 {
 				previousHash = bc.Blocks[len(bc.Blocks)-1].CurrentHash
 			}
-			block := NewBlock(nonce, transaction, previousHash)
+			block := assignmentpackage.NewBlock(nonce, transaction, previousHash)
 			bc.Blocks = append(bc.Blocks, block)
 			fmt.Println("Block added to the blockchain.")
 		case "2":
@@ -62,7 +64,7 @@ func main() {
 			newTransaction := strings.TrimSpace(scanner.Text())
 			blockIndex, err := strconv.Atoi(index)
 			if err != nil || blockIndex >= 0 && blockIndex < len(bc.Blocks) {
-				bc.ChangeBlock(blockIndex, newTransaction)
+				assignmentpackage.ChangeBlock(bc, blockIndex, newTransaction)
 				fmt.Println("Block's transaction changed.")
 			} else {
 				fmt.Println("Invalid block index.")
@@ -75,28 +77,3 @@ func main() {
 		}
 	}
 }
-
-// 	bc.Blocks = append(bc.Blocks, NewBlock(0, "Genesis Transaction", ""))
-// 	bc.Blocks = append(bc.Blocks, NewBlock(1, "Alice to Bob", bc.Blocks[len(bc.Blocks)-1].CurrentHash))
-// 	bc.Blocks = append(bc.Blocks, NewBlock(2, "Bob to Carol", bc.Blocks[len(bc.Blocks)-1].CurrentHash))
-
-// 	// Print the blockchain
-// 	fmt.Println("Blockchain:")
-// 	bc.ListBlocks()
-
-// 	// Change a block's transaction
-// 	fmt.Println("Changing block 1...")
-// 	bc.ChangeBlock(1, "Mallory to Eve")
-
-// 	// Print the blockchain after change
-// 	fmt.Println("Blockchain after change:")
-// 	bc.ListBlocks()
-
-// 	// Verify blockchain integrity
-// 	fmt.Println("Verifying blockchain integrity...")
-// 	if bc.VerifyChain() {
-// 		fmt.Println("Blockchain is valid.")
-// 	} else {
-// 		fmt.Println("Blockchain is not valid.")
-// 	}
-// }
