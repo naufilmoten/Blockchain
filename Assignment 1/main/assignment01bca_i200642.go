@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	assignmentpackage "github.com/naufilmoten/Blockchain/Assignment 1"
+	assignmentpackage "github.com/naufilmoten/Blockchain/Assignment 1/package"
 )
 
 func main() {
