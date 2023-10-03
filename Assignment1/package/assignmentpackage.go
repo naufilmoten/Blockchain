@@ -44,7 +44,7 @@ func (bc *Blockchain) ListBlocks() {
 	}
 }
 
-func (bc *Blockchain) ChangeBlock(index int, newTransaction string) {
+func ChangeBlock(bc *Blockchain, index int, newTransaction string) {
 	if index >= 0 && index < len(bc.Blocks) {
 		block := bc.Blocks[index]
 		block.Transaction = newTransaction
