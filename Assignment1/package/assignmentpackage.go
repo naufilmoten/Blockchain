@@ -44,7 +44,7 @@ func (bc *Blockchain) ListBlocks() {
 	}
 }
 
-func ChangeBlock(bc *Blockchain, index int, newTransaction string) {
+func (bc *Blockchain) ChangeBlock(index int, newTransaction string) {
 	if index >= 0 && index < len(bc.Blocks) {
 		block := bc.Blocks[index]
 		block.Transaction = newTransaction
@@ -57,16 +57,23 @@ func (bc *Blockchain) VerifyChain() bool {
 		return true
 	}
 
-	for i := len(bc.Blocks) - 1; i > 0; i-- {
+	for i := len(bc.Blocks) - 1; i >= 0; i-- {
 		currentBlock := bc.Blocks[i]
-		previousBlock := bc.Blocks[i-1]
 
-		if CalculateHash(currentBlock) != currentBlock.CurrentHash {
-			return false
-		}
+		if i == 0 {
+			if CalculateHash(currentBlock) != currentBlock.CurrentHash {
+				return false
+			}
+		} else {
+			previousBlock := bc.Blocks[i-1]
 
-		if currentBlock.PreviousHash != previousBlock.CurrentHash {
-			return false
+			if CalculateHash(currentBlock) != currentBlock.CurrentHash {
+				return false
+			}
+
+			if currentBlock.PreviousHash != previousBlock.CurrentHash {
+				return false
+			}
 		}
 	}
 

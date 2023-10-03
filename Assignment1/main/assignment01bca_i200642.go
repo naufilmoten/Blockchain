@@ -64,7 +64,7 @@ func main() {
 			newTransaction := strings.TrimSpace(scanner.Text())
 			blockIndex, err := strconv.Atoi(index)
 			if err != nil || blockIndex >= 0 && blockIndex < len(bc.Blocks) {
-				assignmentpackage.ChangeBlock(bc, blockIndex, newTransaction)
+				bc.ChangeBlock(blockIndex, newTransaction)
 				fmt.Println("Block's transaction changed.")
 			} else {
 				fmt.Println("Invalid block index.")
